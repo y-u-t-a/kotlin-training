@@ -1,7 +1,6 @@
 package training
 
-import kotlin.test.Test
-import kotlin.test.assertNotNull
+import kotlin.test.*
 
 class AppTest {
     @Test fun appHasAGreeting() {
