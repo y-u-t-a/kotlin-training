@@ -1,12 +1,9 @@
 package training
 
-class App {
-    val greeting: String
-        get() {
-            return "Hello World!"
-        }
-}
-
+/**
+ * main という関数はエントリーポイントとなる。
+ * https://kotlinlang.org/docs/basic-syntax.html#program-entry-point
+ */
 fun main() {
-    println(App().greeting)
+    println("Hello World!")
 }
