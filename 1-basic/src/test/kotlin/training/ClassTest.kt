@@ -24,4 +24,13 @@ class ClassTest {
         assertEquals(u1, u2)
         assertTrue { u1 == u2 }
     }
+
+    @Test
+    fun backingProperty() {
+        val u = BackingPropertyUser("User")
+        assertEquals(u.name, "USER")
+
+        val e = BackingPropertyUser(null)
+        assertEquals(e.name, "EMPTY")
+    }
 }
