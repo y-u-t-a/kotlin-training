@@ -11,7 +11,7 @@ data class DataClassUser(
 )
 
 /**
- * https://kotlinlang.org/docs/properties.html#backing-properties
+ * [Docs](https://kotlinlang.org/docs/properties.html#backing-properties)
  */
 data class BackingPropertyUser(
     private val _name: String?
