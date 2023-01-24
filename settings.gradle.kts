@@ -1,4 +1,4 @@
 rootProject.name = "kotlin-training"
 include(
-    "1-basic",
+    "1-stdlib",
 )
