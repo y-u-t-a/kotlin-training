@@ -15,5 +15,5 @@ dependencies {
 }
 
 application {
-    mainClass.set("training.AppKt")
+    mainClass.set("training.MainKt")
 }
