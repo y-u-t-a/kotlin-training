@@ -1,5 +1,6 @@
 package training
 
+import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.assertThrows
 import kotlin.test.Test
 import kotlin.test.assertEquals
@@ -18,9 +19,9 @@ class EnumTest {
     }
 
     @Test
+    @DisplayName("valueOf の引数の値が enum に存在しない")
     fun testNotMatchValue() {
         assertThrows<IllegalArgumentException> {
-            // valueOf の引数の値が enum に存在しない場合、IllegalArgumentException がスローされる
             DayOfWeek.valueOf("DAYDAY")
         }
     }
