@@ -47,8 +47,9 @@ class EnumTest {
 
     @Test
     fun testInvalidCode() {
-        assertThrows<IllegalArgumentException> {
+        val err = assertThrows<IllegalArgumentException> {
             PrefCode.fromCode("99")
         }
+        assertEquals(err.message, "No enum constant.")
     }
 }
