@@ -1,5 +1,6 @@
 package training
 
+import org.junit.jupiter.api.assertThrows
 import kotlin.test.Test
 import kotlin.test.assertEquals
 
@@ -16,16 +17,20 @@ class EnumTest {
         assertEquals(DayOfWeek.SUNDAY, sunDay)
     }
 
-    @Test(expected = IllegalArgumentException::class)
+    @Test
     fun testNotMatchValue() {
-        // valueOf の引数の値が enum に存在しない場合、IllegalArgumentException がスローされる
-        DayOfWeek.valueOf("DAYDAY")
+        assertThrows<IllegalArgumentException> {
+            // valueOf の引数の値が enum に存在しない場合、IllegalArgumentException がスローされる
+            DayOfWeek.valueOf("DAYDAY")
+        }
     }
 
-    @Test(expected = IllegalArgumentException::class)
+    @Test
     fun testIgnoreCase() {
-        // Enum の値は大文字・小文字が区別される
-        DayOfWeek.valueOf("sunday")
+        assertThrows<IllegalArgumentException> {
+            // Enum の値は大文字・小文字が区別される
+            DayOfWeek.valueOf("sunday")
+        }
     }
 
     @Test
@@ -40,8 +45,10 @@ class EnumTest {
         assertEquals(PrefCode.HOKKAIDO, hokkaido)
     }
 
-    @Test(expected = IllegalArgumentException::class)
+    @Test
     fun testInvalidCode() {
-        PrefCode.fromCode("99")
+        assertThrows<IllegalArgumentException> {
+            PrefCode.fromCode("99")
+        }
     }
 }
