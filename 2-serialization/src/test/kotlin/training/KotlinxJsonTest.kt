@@ -102,4 +102,19 @@ class KotlinxJsonTest {
         assertEquals(20, json["age"]?.jsonPrimitive?.int)
         assertEquals((0..9).toList(), json["num"]?.jsonArray?.map { it.jsonPrimitive.int })
     }
+
+    @Test
+    @DisplayName("関数をプロパティにもつクラスの変換")
+    fun hasFunctionField() {
+        @Serializable
+        data class C(
+            val str: String,
+            @Transient
+            val func: (() -> Unit)? = null
+        )
+
+        val c = C("A")
+        assertEquals("""{"str":"A"}""", Json.encodeToString(c))
+        assertEquals(c, Json.decodeFromString("""{"str":"A"}"""))
+    }
 }
