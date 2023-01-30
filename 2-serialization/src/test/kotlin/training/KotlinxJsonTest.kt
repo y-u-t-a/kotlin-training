@@ -1,12 +1,12 @@
 package training
 
-import kotlinx.serialization.decodeFromString
-import kotlinx.serialization.encodeToString
+import kotlinx.serialization.*
 import kotlinx.serialization.json.*
+import org.junit.jupiter.api.DisplayName
 import kotlin.test.Test
 import kotlin.test.assertEquals
 
-private const val sampleJson1 = """
+private const val SAMPLE_JSON_1 = """
 {
     "id": 1,
     "name": "iPhone 14",
@@ -25,7 +25,7 @@ private val sampleObject1 = Product(
     brand = Brand(name = "Apple"),
     categories = listOf("smartphones")
 )
-private const val sampleJson2 = """
+private const val SAMPLE_JSON_2 = """
 {
     "id": 2,
     "name": "Pixel 7",
@@ -50,16 +50,18 @@ private val sampleObject2 = Product(
  * [Docs](https://kotlinlang.org/api/kotlinx.serialization/kotlinx-serialization-json/kotlinx.serialization.json/)
  */
 class KotlinxJsonTest {
+    private val jsonSerializer = Json { ignoreUnknownKeys = true }
+
     @Test
     fun deserializeJson() {
-        val actual = Json { ignoreUnknownKeys = true }.decodeFromString<Product>(sampleJson1)
+        val actual = jsonSerializer.decodeFromString<Product>(SAMPLE_JSON_1)
         assertEquals(sampleObject1, actual)
     }
 
     @Test
     fun deserializeJsonArray() {
-        val jsonArray = "[$sampleJson1, $sampleJson2]"
-        val actual = Json { ignoreUnknownKeys = true }.decodeFromString<List<Product>>(jsonArray)
+        val jsonArray = "[$SAMPLE_JSON_1, $SAMPLE_JSON_2]"
+        val actual = jsonSerializer.decodeFromString<List<Product>>(jsonArray)
         assertEquals(listOf(sampleObject1, sampleObject2), actual)
     }
 
@@ -91,7 +93,9 @@ class KotlinxJsonTest {
             put("name", "aaa")
             put("age", 20)
             putJsonArray("num") {
-                for (i in 0..9) { add(i) }
+                for (i in 0..9) {
+                    add(i)
+                }
             }
         }
         assertEquals("aaa", json["name"]?.jsonPrimitive?.content)
