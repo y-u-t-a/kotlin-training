@@ -117,4 +117,20 @@ class KotlinxJsonTest {
         assertEquals("""{"str":"A"}""", Json.encodeToString(c))
         assertEquals(c, Json.decodeFromString("""{"str":"A"}"""))
     }
+
+    @Test
+    @DisplayName("カスタムシリアライザを用いたクラスの変換")
+    fun customSerializer() {
+        @Serializable
+        data class C(
+            val enum: DeserializableEnum
+        )
+        val c = C(DeserializableEnum.ONE)
+        // ONE ではなく "01" に変換される
+        assertEquals("""{"enum":"01"}""", Json.encodeToString(c))
+        val actual = Json.decodeFromString<C>("""{"enum":"01"}""")
+        // "01" が列挙子 ONE に変換される
+        assertEquals(c, actual)
+        assertEquals(DeserializableEnum.ONE, actual.enum)
+    }
 }
