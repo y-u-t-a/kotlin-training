@@ -9,8 +9,8 @@ import kotlin.test.assertEquals
  * [Docs](https://kotlinlang.org/docs/extensions.html)
  */
 class ExtensionsTest {
-    private fun <T> Collection<T>?.toCsv() : String {
-        return this?.joinToString(",") ?: ""
+    private fun <T> Collection<T>?.toCsv() : String? {
+        return this?.joinToString(",")
     }
     private val <T> Collection<T>.lastIndex: Int
         get() = size - 1
@@ -20,7 +20,7 @@ class ExtensionsTest {
         val l = listOf("A", "B", "C")
         assertEquals("A,B,C", l.toCsv())
         val n: List<String>? = null
-        assertEquals("", n.toCsv())
+        assertEquals(null, n.toCsv())
     }
 
     @Test
